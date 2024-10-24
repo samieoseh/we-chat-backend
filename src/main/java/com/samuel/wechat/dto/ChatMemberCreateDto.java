@@ -11,10 +11,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ChatDto {
+public class ChatMemberCreateDto {
     private String id;
-    private String chatName;
-    private Boolean isGroup;
-    private String createdBy;
-    private Date createdAt;
+    private String chatId;
+    private String userId;
+    private String role;
+    private Date joinedAt;
 }

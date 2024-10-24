@@ -21,6 +21,7 @@ public class ChatService {
     @Autowired
     private UserRepo userRepo;
 
+
     public ChatEntity addChat(ChatEntity chatEntity) {
         chatEntity.setCreatedAt(new Date());
         return chatRepo.save(chatEntity);
@@ -38,5 +39,13 @@ public class ChatService {
 
     public void deleteChat(String chatId) {
         chatRepo.deleteById(chatId);
+    }
+
+    public boolean isGroupChat(String chatId) {
+        return chatRepo.existsByIdAndIsGroupTrue(chatId);
+    }
+
+    public List<ChatEntity> getChats() {
+        return StreamSupport.stream(chatRepo.findAll().spliterator(), false).toList();
     }
 }

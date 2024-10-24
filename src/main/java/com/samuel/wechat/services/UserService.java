@@ -125,4 +125,8 @@ public class UserService {
     public String extractDeviceIdFromRequest(HttpServletRequest request) {
         return request.getHeader("device-id");
     }
+
+    public UserEntity getUserById(String userId) {
+        return userRepo.findById(userId).orElse(null);
+    }
 }

@@ -2,7 +2,6 @@ package com.samuel.wechat.entities;
 
 import java.util.Date;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,31 +9,33 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@Entity(name = "chat_members")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Entity(name = "chats")
-public class ChatEntity {
+public class ChatMemberEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    private String chatName;
-
-    @Column(nullable = false)
-    private Boolean isGroup;
-
     @ManyToOne(optional = false)
-    @JoinColumn(name = "created_by", nullable = false)
-    private UserEntity createdBy;
+    @JoinColumn(name = "chat_id", nullable = false)
+    private ChatEntity chat;
+
+    @OneToOne(optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    private UserEntity user;
 
     @Column(nullable = false)
-    private Date createdAt;
+    private String role;
 
+    @Column(nullable = false)
+    private Date joinedAt;
 }
